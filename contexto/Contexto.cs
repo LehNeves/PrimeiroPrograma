@@ -10,7 +10,7 @@ namespace Oficial.contexto
 
         public Contexto() : base(nameOrConnectionString: "oficial")
         {
-            Database.SetInitializer<Contexto>(new OficialContextoInitializer());
+            //Database.SetInitializer<Contexto>(new OficialContextoInitializer());
         }
 
         public DbSet<Pessoa> Pessoa { get; set; }

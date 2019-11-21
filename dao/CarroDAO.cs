@@ -12,10 +12,10 @@ namespace Oficial.dao
     {
 
         Contexto contexto = new Contexto();
-        public List<Carro> GetCarrosFromPessoa(int id_Pessoa)
+        public List<Carro> GetCarrosFromPessoa(int index)
         {
 
-            return contexto.Carro.SqlQuery("Select * from pessoas, carroes where carroes.Pessoa_id = pessoas.id and pessoas.id = " + id_Pessoa).ToList(); ;
+            return contexto.Carro.SqlQuery("Select carroes.* from pessoas, carroes where carroes.Pessoa_id = pessoas.id and pessoas.id = " + index).ToList(); ;
 
         }
 

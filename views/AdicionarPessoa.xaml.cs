@@ -2,6 +2,7 @@
 using System.Windows;
 using Oficial.models;
 using Oficial.dao;
+using System;
 
 namespace Oficial.views
 {
@@ -10,11 +11,10 @@ namespace Oficial.views
     /// </summary>
     public partial class AdicionarPessoa : Window
     {
-        
-
-        AdicionarCarro AdicionarCarroForm;
+        public AdicionarCarro AdicionarCarroForm = new AdicionarCarro();
 
         Pessoa pessoa = new Pessoa();
+
         public AdicionarPessoa()
         {
             InitializeComponent();
@@ -22,31 +22,34 @@ namespace Oficial.views
 
         public void AdicionarCarro(object sender, RoutedEventArgs e)
         {
-            List<Carro> Carro = new List<Carro>();
-            AdicionarCarroForm = new AdicionarCarro(Carro);
-            AdicionarCarroForm.Show();
-            pessoa.Carros = Carro;
+            AdicionarCarroForm.ShowDialog();
         }
 
         private void Salvar(object sender, RoutedEventArgs e)
         {
-            if (VerificarCampos())
-            {
-                PessoaDAO dao = new PessoaDAO();
-                dao.Save(pessoa);
-                if (AdicionarCarroForm != null)
-                    if (AdicionarCarroForm.IsVisible)
-                        AdicionarCarroForm.Close();
-                this.Close();
-            }
-            
+            if (AdicionarCarroForm != null)
+                if (AdicionarCarroForm.IsVisible)
+                {
+                    MessageBox.Show("Primeiro encerro o form Adicionar Carro");
+                }
+                else
+                {
+                    pessoa.Carros = AdicionarCarroForm.GetCarros();
+                    if (VerificarCampos())
+                    {
+                        PessoaDAO dao = new PessoaDAO();
+                        dao.Save(pessoa);
+                        if (AdicionarCarroForm != null)
+                            AdicionarCarroForm.Close();
+                        this.Close();
+                    }
+                }
         }
 
         private void Fechar(object sender, RoutedEventArgs e)
         {
-            if(AdicionarCarroForm != null)
-                if (AdicionarCarroForm.IsVisible)
-                    AdicionarCarroForm.Close();
+            if (AdicionarCarroForm != null)
+                AdicionarCarroForm.Close();
             this.Close();
         }
 
@@ -73,11 +76,18 @@ namespace Oficial.views
                 MessageBox.Show("Não foram inseridos Carros", "Lista de Carros vazia");
                 return false;
             }
-
-
             return true;
         }
-    }
 
-    
+        private void Fechando(object sender, EventArgs e)
+        {
+            AdicionarCarroForm.Close();
+        }
+
+        private void Fechado(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            AdicionarCarroForm.Close();
+        }
+
+    }
 }
