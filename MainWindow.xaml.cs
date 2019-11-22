@@ -15,8 +15,7 @@ namespace Oficial
     {
         List<Pessoa> pessoas = new List<Pessoa>();
 
-        public AdicionarPessoa adicionarPessoa = new AdicionarPessoa();
-        public AdicionarCarro AdicionarCarroForm = new AdicionarCarro();
+        AdicionarPessoa adicionarPessoa = new AdicionarPessoa();
 
         PessoaDAO pessoaDAO = new PessoaDAO();
         public MainWindow()
@@ -76,19 +75,5 @@ namespace Oficial
             ArquivoService arquivoService = new ArquivoService();
             arquivoService.ImportarTexto(caminho);
         }
-
-        private void AdicionarPessoa_Closed(object sender, System.EventArgs e)
-        {
-            if(adicionarPessoa != null)
-                if (adicionarPessoa.AdicionarCarroForm != null)
-                    adicionarPessoa.AdicionarCarroForm.Close();
-        }
-
-        private void on_Closed() {
-            if (adicionarPessoa != null)
-                if (adicionarPessoa.AdicionarCarroForm != null)
-                    adicionarPessoa.AdicionarCarroForm.Close();
-        }
-
     }
 }

@@ -11,7 +11,8 @@ namespace Oficial.views
     /// </summary>
     public partial class AdicionarPessoa : Window
     {
-        public AdicionarCarro AdicionarCarroForm = new AdicionarCarro();
+
+        AdicionarCarro AdicionarCarroForm = new AdicionarCarro();
 
         Pessoa pessoa = new Pessoa();
 
@@ -22,7 +23,7 @@ namespace Oficial.views
 
         public void AdicionarCarro(object sender, RoutedEventArgs e)
         {
-            AdicionarCarroForm.ShowDialog();
+            AdicionarCarroForm.Show();
         }
 
         private void Salvar(object sender, RoutedEventArgs e)
@@ -30,7 +31,7 @@ namespace Oficial.views
             if (AdicionarCarroForm != null)
                 if (AdicionarCarroForm.IsVisible)
                 {
-                    MessageBox.Show("Primeiro encerro o form Adicionar Carro");
+                    MessageBox.Show("Primeiro encerre o form Adicionar Carro");
                 }
                 else
                 {
@@ -77,11 +78,6 @@ namespace Oficial.views
                 return false;
             }
             return true;
-        }
-
-        private void Fechando(object sender, EventArgs e)
-        {
-            AdicionarCarroForm.Close();
         }
 
         private void Fechado(object sender, System.ComponentModel.CancelEventArgs e)
